@@ -43,6 +43,12 @@ const CookBookSchema = new mongoose.Schema({
         required: [true, "You must have an directions on how to make dish!"],
         minlength: [15, "Your directions must be at least 15 Characters"]
     },
+    author:
+    {
+        type: String,
+        required: [true, "This recipe must have an author!"],
+        minlength: [2, "You must have at least 2 Characters for the author"]
+    }
 }, {timestamps:true});
 
 module.exports = mongoose.model("CookBook", CookBookSchema);

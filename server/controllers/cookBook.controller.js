@@ -24,6 +24,18 @@ module.exports = {
         })
     },
 
+    findOneRecipeByAuthor: (req, res) => {
+        CookBook.findOne(
+            {author: req.params.author}
+        )
+        .then((oneRecipe) => {
+            res.status(200).json(oneRecipe)
+        })
+        .catch((err) => {
+            res.status(500).json(err)
+        })
+    },
+
     createRecipe: (req, res) => {
         CookBook.create(req.body)
         .then((newRecipe) => {
