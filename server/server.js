@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors());
+
 require("./config/mongoose.config");
 
 require("./routes/cookBook.routes")(app);

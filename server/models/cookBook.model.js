@@ -5,7 +5,7 @@ const CookBookSchema = new mongoose.Schema({
     {
         type: String,
         required: [true, "Title is required"],
-        minlength: [4, "Title must be at least 4 Characters"]
+        minlength: [3, "Title must be at least 3 Characters"]
     },
     totalTime:
     {
@@ -31,6 +31,10 @@ const CookBookSchema = new mongoose.Schema({
         required: [true, "You must put in a Serving Size!"],
         min: [1, "The serving must be greater than 0"]
     },
+    level:
+    {
+        type: String,
+    },
     ingredients:
     {
         type: String,
@@ -40,7 +44,7 @@ const CookBookSchema = new mongoose.Schema({
     directions:
     {
         type: String,
-        required: [true, "You must have an directions on how to make dish!"],
+        required: [true, "You must have directions on how to make dish!"],
         minlength: [15, "Your directions must be at least 15 Characters"]
     },
     author:

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -15,11 +16,10 @@ const MainPage = (props) => {
         })
     }, [])
     
-    
-    
     return (
         <div>
             <h1>Cookbook</h1>
+            <Link to="/recipe/create">Add Recipe</Link>
             <table>
                 <thead>
                     <tr>
@@ -29,18 +29,25 @@ const MainPage = (props) => {
                         <th>Author</th>
                     </tr>
                 </thead>
-                <tbody>
                     {
-                        recipeList.map(())
-                    }
-                </tbody>
+                        recipeList.map((recipe) => (
+                        <div key={ recipe._id }>
+                        <tbody>
+                            <tr>
+                                <td>{ recipe.title }</td>
+                                <td>{ recipe.totalTime }</td>
+                                <td>{ recipe.level }</td>
+                                <td>
+                                    <Link to={`/view/${recipe.author}/author`}>{ recipe.author }</Link>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </div>
+                        ))
+                    }            
             </table>
         </div>
     );
 };
-
-
-
-
 
 export default MainPage;
