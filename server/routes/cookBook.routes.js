@@ -1,4 +1,3 @@
-const cookBookController = require("../controllers/cookBook.controller");
 const CookBookController = require("../controllers/cookBook.controller");
 
 module.exports = (app) => {
