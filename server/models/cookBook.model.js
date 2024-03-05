@@ -35,9 +35,9 @@ const CookBookSchema = new mongoose.Schema({
     {
         type: String,
     },
-    ingredients:
+    ingredientList: 
     {
-        type: String,
+        type: [String],
         required: [true, "You must have an ingredient!"],
         minlength: [2, "Your ingredient must be at least 2 Characters"]
     },

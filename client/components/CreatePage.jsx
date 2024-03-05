@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 
-const CreatePage = () => {
+
+const CreatePage = (props) => {
     const navigate = useNavigate();
     const [ title, setTitle ] = useState("");
     const [ totalTime, setTotalTime ] = useState("");
@@ -10,14 +11,15 @@ const CreatePage = () => {
     const [ cookTime, setCookTime ] = useState("");
     const [ servingSize, setServingSize ] = useState("");
     const [ level, setLevel ] = useState("Beginner");
-    const [ ingredients, setIngredients ] = useState("");
+    const [ ingredient, setIngredient ] = useState("");
+    const [ ingredientList, setIngredientList ] = useState([]);
     const [ directions, setDirections ] = useState("");
     const [ author, setAuthor ] = useState("");
     const [ error, setError] = useState({})
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        const newRecipe = { title, totalTime, prepTime, cookTime, servingSize, level, ingredients, directions, author };
+        const newRecipe = { title, totalTime, prepTime, cookTime, servingSize, level, ingredientList, directions, author };
         axios.post("http://localhost:8000/api/create/recipe", newRecipe)
             .then(res => {
                 console.log(res.data);
@@ -96,13 +98,21 @@ const CreatePage = () => {
                     }
                 </p>
                 <p>
-                    <label>Ingredients: </label>
-                    <input type="text" onChange={ (e) => setIngredients(e.target.value) } value={ ingredients } />
-                    {
-                        error.ingredients?
-                        <p>{error.ingredients.message}</p>:
-                        null
-                    }
+                    <label>Ingredient:</label>
+                    <input
+                        value={ ingredient }
+                        onChange={ (e) => setIngredient(e.target.value)}
+                    />
+                    <button onClick={ () => {
+                        setIngredientList([
+                        ...ingredientList, {ingredient: ingredient}
+                        ]);
+                    }}>Add</button>
+                    <ul>
+                        {ingredientList.map(ingredient => (
+                        <li key={ingredient.id}>{ingredient.ingredient}</li>
+                        ))}
+                    </ul>
                 </p>
                 <p>
                     <label>Directions: </label><br/>
